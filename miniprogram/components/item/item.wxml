@@ -1,0 +1,4 @@
+<view class="itemSetting">
+    <text class="obj">{{propFunc}}</text>
+    <text class="more">></text>
+</view>

@@ -1,0 +1,16 @@
+<view class="body">
+    <!-- 搜索框 封装组件使用-->
+    <search></search>
+    <!-- 每日推荐区域 -->
+    <view class="recommendContainer" bindtap="poetDetails" data-id="{{recommendPoem._id}}">
+        <!-- 诗句 -->
+        <view class="recommendPeotry">{{recommendPoem.paragraphs[0]}}</view>
+        <!-- 作者 -->
+        <view class="recommendPoet">--{{recommendPoem.author}}</view>
+    </view>
+
+    <!-- 诗词分类 -->
+    <category prop-category="朝代"></category>
+    <category prop-category="体裁"></category>
+    <category prop-category="风格"></category>
+</view>

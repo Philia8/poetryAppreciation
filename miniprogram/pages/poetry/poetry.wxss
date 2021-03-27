@@ -1,0 +1,82 @@
+.poetryMain {
+    background-color: #F4F4F4;
+    padding: 20rpx;
+}
+
+
+/* 诗词详情 */
+
+.poetry {
+    height: auto;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 诗名 */
+
+.poetry .title {
+    font-weight: bolder;
+    font-size: 35rpx;
+    margin-top: 20rpx;
+}
+
+
+/* 朝代及作者 */
+
+.dy-au {
+    display: flex;
+    margin-top: 10rpx;
+}
+
+.dy-au .dynasty {
+    margin: 0 20rpx;
+}
+
+.poetry .content {
+    padding: 30rpx;
+}
+
+/* 诗人详情、诗词赏析列表 */
+.details{
+    margin-top: 15rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    background-color: #fff;
+}
+.details .type{ 
+    display: flex;
+    justify-content: space-around;
+    transition: border-bottom 100ms linear;
+}
+
+.typeActive{
+    border-bottom: 2rpx solid hotpink;
+}
+
+/* 作者及收藏按钮 */
+
+/* .poetColl {
+    display: flex;
+    height: 70rpx;
+    margin-top: 15rpx;
+}
+
+.poetColl button {
+    text-align: center;
+    background-color: #fff;
+} */
+
+/* 若该诗词已收藏则背景色改变 */
+.poetColl .iscoll{
+    background-color: hotpink;
+}
+
+/* 注释及赏析 */
+
+.moreAppre {
+    margin-top: 15rpx;
+}

@@ -1,0 +1,18 @@
+/* 注释、赏析 */
+
+.details {
+    width: auto;
+    padding: 15rpx;
+    margin-bottom: 10rpx;
+    background-color: #fff;
+}
+
+.details .subject {
+    color: #000;
+    font-weight: 500;
+    font-size: 36rpx;
+}
+
+.details .content {
+    margin-top: 5rpx;
+}

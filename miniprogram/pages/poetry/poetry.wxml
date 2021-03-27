@@ -1,0 +1,29 @@
+<view class="poetryMain">
+    <!-- 诗词 -->
+    <view class="poetry">
+        <view class="title">{{poetry.title}}</view>
+        <view class="dy-au">
+            <!-- <view class="dynasty">{{poetry.dynasty}}</view> -->
+            <view class="author">{{poetry.author}}</view>
+        </view>
+        <!-- 诗词两句一行 -->
+        <view class="content">
+            <view wx:for="{{poetry.paragraphs}}" wx:key="index">{{item}}</view>
+        </view>
+    </view>
+    <!-- 作者及收藏 -->
+    <view class="poetColl">
+        <!-- <button class="poet" bindtap="poetDetails" data-id="{{poetry.author_id}}">作者</button> -->
+        <!-- <button class="collection" bindtap="poetColl" wx:if="{{isShow}}">收藏</button>
+        <button class="iscoll" bindtap="poetColl" wx:else>已收藏</button> -->
+    </view>
+    <!-- 诗人详情、诗词详情 -->
+    <view class="details">
+        <view class="type">
+            <view wx:for="{{type}}" wx:key="index">
+                {{item}}
+            </view>
+        </view>
+        <view class="content"></view>
+    </view>
+</view>

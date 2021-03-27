@@ -1,0 +1,4 @@
+<view class="searchContainer">
+    <view class="fa fa-search"></view>
+    <input class="searchInput" type="text" placeholder="请输入作者、诗名" />
+</view>

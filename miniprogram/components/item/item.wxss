@@ -1,0 +1,12 @@
+.itemSetting {
+    height: 65rpx;
+    line-height: 65rpx;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 15rpx;
+}
+
+.itemSetting .more {
+    color: #C5C5C5;
+}

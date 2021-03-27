@@ -1,0 +1,5 @@
+<!-- 我的收藏 -->
+<view class="main">
+    <view class="title">我的收藏</view>
+    <view class="content"></view>
+</view>

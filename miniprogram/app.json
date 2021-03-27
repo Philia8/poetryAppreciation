@@ -1,0 +1,45 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/poetry/poetry",
+        "pages/personal/personal",
+        "pages/games/games",
+        "pages/author/author",
+        "pages/coll/coll"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "我爱诗词",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#333",
+        "selectedColor": "#d43c33",
+        "backgroundColor": "#fff",
+        "position": "bottom",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "主页",
+                "iconPath": "/static/images/tabs/tab-home.png",
+                "selectedIconPath": "/static/images/tabs/tab-home-current.png"
+            },
+            {
+                "pagePath": "pages/games/games",
+                "text": "益智游戏",
+                "iconPath": "/static/images/tabs/tab-cate.png",
+                "selectedIconPath": "/static/images/tabs/tab-cate-current.png"
+            },
+            {
+                "pagePath": "pages/personal/personal",
+                "text": "个人中心",
+                "iconPath": "/static/images/tabs/tab-my.png",
+                "selectedIconPath": "/static/images/tabs/tab-my-current.png"
+            }
+        ]
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json"
+}

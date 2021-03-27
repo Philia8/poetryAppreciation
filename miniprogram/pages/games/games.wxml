@@ -1,0 +1,5 @@
+<!-- 游戏区域分为两部分，分别代表两个游戏 -->
+<view class="main">
+    <view>诗词接龙</view>
+    <view>诗词填空</view>
+</view>

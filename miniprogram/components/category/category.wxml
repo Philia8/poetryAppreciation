@@ -1,0 +1,29 @@
+<view class="categoryContainer">
+    <!-- 分类头部 -->
+    <view class="categoryHeader">
+        <view class="name">| {{propCategory}}</view>
+    </view>
+    <!-- 分类滚动区域 -->
+    <scroll-view class="categoryScroll" scroll-x="true" enable-flex>
+        <view class="scrollItem">
+            <image src="../../static/images/IMG_4280.JPG"></image>
+            <view class="name">魏晋</view>
+        </view>
+        <view class="scrollItem">
+            <image src="../../static/images/IMG_4280.JPG"></image>
+            <view class="name">魏晋</view>
+        </view>
+        <view class="scrollItem">
+            <image src="../../static/images/IMG_4280.JPG"></image>
+            <view class="name">魏晋</view>
+        </view>
+        <view class="scrollItem">
+            <image src="../../static/images/IMG_4280.JPG"></image>
+            <view class="name">魏晋</view>
+        </view>
+        <view class="scrollItem">
+            <image src="../../static/images/IMG_4280.JPG"></image>
+            <view class="name">魏晋</view>
+        </view>
+    </scroll-view>
+</view>
