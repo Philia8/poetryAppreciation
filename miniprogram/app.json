@@ -5,7 +5,8 @@
         "pages/personal/personal",
         "pages/games/games",
         "pages/author/author",
-        "pages/coll/coll"
+        "pages/coll/coll",
+        "pages/search/search"
     ],
     "window": {
         "backgroundTextStyle": "light",

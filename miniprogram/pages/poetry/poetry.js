@@ -1,8 +1,8 @@
 // pages/poetry/poetry.js
 // 随机诗词
 // const poems = require('../../utils/jinrishici')
-const DB_poets = wx.cloud.database().collection("poets");
-const DB_colls = wx.cloud.database().collection("collections");
+// const DB_poets = wx.cloud.database().collection("poets");
+// const DB_colls = wx.cloud.database().collection("collections");
 Page({
 
     /**
@@ -11,7 +11,7 @@ Page({
     data: {
         // poetry: {}, //诗词中所有数据
         poetid: "",
-        isShow: true, //已收藏按钮样式手是否显示
+        isShow: true, //已收藏按钮样式是否显示
         // author:{}, //作者
         currentIndex: 0, //记录当前是诗人或诗词赏析的索引
         type: ["诗人详情", "诗词赏析", "更多操作"],
