@@ -1,1 +1,6 @@
-/* miniprogram/pages/search/search.wxss */
+/* 页面整体设置 */
+
+.search-show {
+    padding: 30rpx;
+    background-color: #F4F4F4;
+}

@@ -1,16 +1,16 @@
 <view class="body">
     <!-- 搜索框 封装组件使用-->
-    <search></search>
+    <search bindtap="searchHandler"></search>
     <!-- 每日推荐区域 -->
-    <view class="recommendContainer" bindtap="poetDetails" data-id="{{recommendPoem._id}}">
+    <view class="recommendContainer" bindtap="poetDetails" data-id="{{recommandPoem._id}}">
         <!-- 诗句 -->
-        <view class="recommendPeotry">{{recommendPoem.paragraphs[0]}}</view>
+        <view class="recommendPeotry">{{recommandPoem.content[0]}}</view>
         <!-- 作者 -->
-        <view class="recommendPoet">--{{recommendPoem.author}}</view>
+        <view class="recommendPoet">--{{recommandPoem.author}}</view>
     </view>
 
     <!-- 诗词分类 -->
-    <category prop-category="朝代"></category>
-    <category prop-category="体裁"></category>
-    <category prop-category="风格"></category>
+    <category prop-category-header="朝代" types="{{dynasty}}" data-type="朝代"></category>
+    <category prop-category-header="题材" types="{{theme}}" data-type="题材" bind:refresh="refreshHandler"></category>
+    <category prop-category-header="诗人" types="{{poets}}" data-type="诗人"></category>
 </view>

@@ -5,6 +5,7 @@
     margin-top: 40rpx;
     padding: 10rpx;
     /* background-color: #F4F4F4; */
+    overflow: hidden;
 }
 
 
@@ -12,6 +13,7 @@
 
 .categoryContainer {
     background-color: #fff;
+    font-weight: bolder;
 }
 
 .categoryHeader {
@@ -22,30 +24,32 @@
     color: #353535;
 }
 /* 诗词分类滚动 */
-
-.categoryScroll {
-    display: flex;
-    height: 260rpx;
-    /* background-color: rosybrown; */
-    margin-top: 10rpx;
+.scrollContainer{
+    width: 100%;
+    height: 200rpx;
+    margin: 10rpx 0;
+}
+.categoryScroll{
+    width: 100%;
+    height: 200rpx;
+    overflow: hidden;
+    /* 设置不换行 */
+    white-space: nowrap;
 }
 
 .categoryScroll .scrollItem {
-    width: 200rpx;
-    height: 260rpx;
+    margin-right: 10rpx;
+    display: inline-block;
+    width: 180rpx;
+    height: 180rpx;
     margin-right: 35rpx;
-    /* box-shadow: 0 0 5rpx 5rpx rgba(0, 0, 0, .2); */
+    border: 5px solid rgba(200, 200, 200, .4);
     border-radius: 20rpx;
-}
-
-.scrollItem image {
-    width: 175rpx;
-    height: 175rpx;
-    border-radius: 20rpx;
-}
-
-.scrollItem .name {
-    line-height: 50rpx;
-    font-size: 26rpx;
     text-align: center;
+    line-height: 180rpx;
+}
+.scrollItem text {
+    font-size: 62rpx;
+    font-weight: 500;
+    text-shadow: 2rpx 2rpx 5rpx rgba(100, 100, 100, .5);
 }

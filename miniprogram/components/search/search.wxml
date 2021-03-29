@@ -1,4 +1,4 @@
 <view class="searchContainer">
     <view class="fa fa-search"></view>
-    <input class="searchInput" type="text" placeholder="请输入诗名、诗人" bindblur="searchHandler" />
+    <input class="searchInput" type="text" placeholder="请输入诗名、诗人" bindtap="search" />
 </view>

@@ -1,2 +1,3 @@
-<!--miniprogram/pages/search/search.wxml-->
-<text>miniprogram/pages/search/search.wxml</text>
+<view class="search-show">
+    <search></search>
+</view>
