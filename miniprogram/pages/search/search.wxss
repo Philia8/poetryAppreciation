@@ -2,5 +2,14 @@
 
 .search-show {
     padding: 30rpx;
-    background-color: #F4F4F4;
+    background-color: #fff;
+}
+.poems{
+    padding: 30rpx;
+    background-color: #fff;
+}
+.poems-item{
+    line-height: 60rpx;
+    font-size: 26rpx;
+    border-bottom: 6rpx solid #f2f2f2;
 }

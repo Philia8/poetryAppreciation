@@ -19,7 +19,7 @@ Page({
         recommandPoem: {}, //推荐诗句的全部数据，诗句、诗人
         dynasty:{}, //所有朝代
         theme:{}, //所有题材
-        poets:{} //所有诗人
+        poets:{}, //所有诗人
     },
 
     /**
@@ -33,22 +33,15 @@ Page({
         this.getTypes && this.getTypes("类型");
         this.getTypes && this.getTypes("作者");
     },
-    // 搜索框跳转至另一个页面
-    searchHandler() {
+    searchHandler(e) {
         wx.navigateTo({
-            url: '/pages/search/search',
-            success: (result) => {
-                console.log("hhh");
-            },
-            fail: () => {}
-        });
+            url: '/pages/search/search'
+        })
     },
     /**
      * 查看诗词详情
      */
     poetDetails: function(e) {
-        // console.log(e.currentTarget.dataset.id); //诗词id
-        // console.log(e);
         wx.navigateTo({
             //查询参数为诗词ID
             url: "/pages/poetry/poetry?id="+ e.currentTarget.dataset.id

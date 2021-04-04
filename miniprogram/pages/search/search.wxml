@@ -1,3 +1,18 @@
 <view class="search-show">
-    <search></search>
+    <search bindsearch="searchValue"></search>
+    <view class="showRes">
+        <view>
+            <text>{{searchResult.name}}</text>
+            <!-- <text>{{}}</text> -->
+        </view>
+        <view class="poems">
+            <view
+                class="poems-item"
+                wx:for="{{searchResult}}" 
+                bindtap="poemDetail"
+                data-id="{{item._id}}"
+                data-author="{{item.author}}"
+            >{{item.name}}</view>
+        </view>
+    </view>
 </view>

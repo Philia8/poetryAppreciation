@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        searchResult: [] //查询结果
     },
 
     /**
@@ -21,46 +21,26 @@ Page({
     onReady: function () {
 
     },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
+    // 搜索内容
+    searchValue(e) {
+        wx.cloud.callFunction({
+            name: "getPoems",
+            data: {
+                searchKey: e.detail.detail.value
+            }
+        }).then(res => {
+            console.log(res);
+            this.setData({
+                searchResult: res.result.data
+            })
+        });
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    // 跳转至诗词详情
+    poemDetail(e) {
+        wx.navigateTo({
+            //查询参数为诗词ID
+            url: "/pages/poetry/poetry?id=" + e.currentTarget.dataset.id +
+                "&author=" + e.currentTarget.dataset.author
+        })
     }
 })

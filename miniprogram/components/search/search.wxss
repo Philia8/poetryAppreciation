@@ -3,7 +3,6 @@
 @import "/static/icon/fontAwesome";
 
 /* 搜索框 */
-
 .searchContainer {
     height: 70rpx;
     /* width: 680rpx; */
@@ -23,6 +22,15 @@
 }
 
 .searchContainer .searchInput {
-    width: 85%;
+    width: 70%;
     line-height: 70rpx;
+}
+
+.searchContainer .btn-search{
+    background-color: #f4f4f4;
+    width: 150rpx;
+    height: 100%;
+    border-radius: 35rpx;
+    text-align: center;
+    font-weight: bolder;
 }
