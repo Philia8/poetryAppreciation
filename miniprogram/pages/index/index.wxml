@@ -2,7 +2,11 @@
     <!-- 搜索框 封装组件使用-->
     <search bindtap="searchHandler"></search>
     <!-- 每日推荐区域 -->
-    <view class="recommendContainer" bindtap="poetDetails" data-id="{{recommandPoem._id}}">
+    <view class="recommendContainer" 
+        bindtap="poetDetails" 
+        data-author="{{recommandPoem.author}}" 
+        data-id="{{recommandPoem._id}}"
+    >
         <!-- 诗句 -->
         <view class="recommendPeotry">{{recommandPoem.content[0]}}</view>
         <!-- 作者 -->

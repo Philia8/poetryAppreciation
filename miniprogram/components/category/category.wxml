@@ -5,7 +5,12 @@
     </view>
     <!-- 分类滚动区域 -->
     <view class="scrollContainer">
-        <scroll-view class="categoryScroll" scroll-x="true" bindscrolltolower="refreshData" refresher-enabled="true">
+        <scroll-view 
+            class="categoryScroll" 
+            scroll-x="true" 
+            scroll-y="false"
+            bindscrolltolower="refreshData"
+        >
             <view class="scrollItem" wx:for="{{types}}" wx:key="index" bindtap="more">
                 <text>{{item.name}}</text>
             </view>

@@ -19,7 +19,7 @@ Page({
         recommandPoem: {}, //推荐诗句的全部数据，诗句、诗人
         dynasty:{}, //所有朝代
         theme:{}, //所有题材
-        poets:{} //诗人
+        poets:{} //所有诗人
     },
 
     /**
@@ -47,10 +47,12 @@ Page({
      * 查看诗词详情
      */
     poetDetails: function(e) {
-        console.log(e.currentTarget.dataset.id);
+        // console.log(e.currentTarget.dataset.id); //诗词id
         // console.log(e);
         wx.navigateTo({
-            url: "/pages/poetry/poetry?_id=" + e.currentTarget.dataset.id //查询参数为诗词ID
+            //查询参数为诗词ID
+            url: "/pages/poetry/poetry?id="+ e.currentTarget.dataset.id
+                +"&author=" + e.currentTarget.dataset.author
         })
     },
     // 随机古诗词获取
@@ -98,10 +100,10 @@ Page({
         })
     },
     // 右拉刷新
-    // refreshHandler(e) {
-    //         console.log("HHH");
-    //     this.getTypes(e.currentTarget.dataset.type);
-    //     console.log(this.data.theme);
-    //     // 当前问题:从数据库中取数据始终取到相同的数据集,需要进行分批显示
-    // }
+    refreshHandler(e) {
+            // console.log("HHH");
+        this.getTypes(e.currentTarget.dataset.type);
+        // console.log(this.data.theme);
+        // 当前问题:从数据库中取数据始终取到相同的数据集,需要进行分批显示
+    }
 })

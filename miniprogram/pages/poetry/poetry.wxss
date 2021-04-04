@@ -20,7 +20,7 @@
 
 .poetry .title {
     font-weight: bolder;
-    font-size: 35rpx;
+    font-size: 42rpx;
     margin-top: 20rpx;
 }
 
@@ -51,10 +51,11 @@
     display: flex;
     justify-content: space-around;
     transition: border-bottom 100ms linear;
+    border-bottom: 6rpx solid transparent;
 }
 
 .typeActive{
-    border-bottom: 2rpx solid hotpink;
+    border-bottom: 6rpx solid hotpink;
 }
 
 /* 作者及收藏按钮 */
@@ -77,6 +78,20 @@
 
 /* 注释及赏析 */
 
-.moreAppre {
+.more {
     margin-top: 15rpx;
+    background-color: #fff;
+    font-size: 28rpx;
+}
+.describe .descItem {
+    margin-top: 15rpx;
+    border-bottom: 8rpx solid #f4f4f4;
+    padding: 10rpx;
+}
+.describe .itemTitle {
+    font-size: 30rpx;
+    font-weight: bolder;
+}
+.describe .hidden{
+    display:none;
 }
