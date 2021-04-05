@@ -5,14 +5,16 @@
             <text>{{searchResult.name}}</text>
             <!-- <text>{{}}</text> -->
         </view>
-        <view class="poems">
+        <view class="poems" >
             <view
-                class="poems-item"
+                class="poems-item {{showRes?'':'init'}}"
                 wx:for="{{searchResult}}" 
                 bindtap="poemDetail"
                 data-id="{{item._id}}"
                 data-author="{{item.author}}"
             >{{item.name}}</view>
+            <view class=" {{isShow ? 'find' : 'init'}}">未找到!</view>
+            <view class="{{isWait ? 'wait' : 'init'}}">请稍后...</view>
         </view>
     </view>
 </view>
