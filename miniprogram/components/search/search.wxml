@@ -1,5 +1,9 @@
 <view class="searchContainer">
     <view class="fa fa-search"></view>
-    <input focus="true" class="searchInput" type="text" placeholder="请输入诗名、诗人" bindblur="emitSearch"/>
+    <input
+        class="searchInput" 
+        type="text" 
+        placeholder="请输入诗名、诗人" 
+        bindblur="emitSearch"/>
     <view class="btn-search">搜索</view>
 </view>

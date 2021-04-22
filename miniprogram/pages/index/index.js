@@ -16,7 +16,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        recommandPoem: {}, //推荐诗句的全部数据，诗句、诗人
+        recommandPoem: {
+            content:["随机推荐"]
+        }, //推荐诗句的全部数据，诗句、诗人
         dynasty:{}, //所有朝代
         theme:{}, //所有题材
         poets:{}, //所有诗人
@@ -51,17 +53,27 @@ Page({
     // 随机古诗词获取
     randomPoem() {
         // 从唐诗三百首中随机推荐诗词
-        const random = Math.round(Math.random() * 10); //随机数
-        DB_poems.where({
-            type: "唐诗三百首"
-        }).get().then(res => {
-            // console.log(res);
+        const random = Math.round(Math.random() * 1000); //随机数
+        wx.cloud.callFunction({
+            name: "getCatePoems",
+            data: {
+                searchKey:"唐诗三百首"
+            }
+        }).then(res => {
             this.setData({
-                recommandPoem: res.data[random]
+                recommandPoem: res.result.data[random]
             });
         }).catch(err => {
             console.log(err);
-        });
+        })
+        // DB_poems.where({
+        //     type: "唐诗三百首"
+        // }).get().then(res => {
+        //     // console.log(res);
+            
+        // }).catch(err => {
+        //     console.log(err);
+        // });
     },
     // 获取所有朝代
     getTypes(mainName) {

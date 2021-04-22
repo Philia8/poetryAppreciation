@@ -1,9 +1,9 @@
-<view class="main">
+<view class="main" bindtap="test">
     <!-- 用户头像和昵称 -->
     <view class="avatarContianer">
         <view class="avatar">
-            <image src="../../static/images/IMG_4280.JPG"></image>
-            <view class="nickname">毛毛</view>
+            <image src="{{userInfos.avatarUrl}}"></image>
+            <view class="nickname">{{userInfos.nickName}}</view>
         </view>
     </view>
 

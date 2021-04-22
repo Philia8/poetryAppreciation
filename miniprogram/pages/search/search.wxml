@@ -1,20 +1,25 @@
 <view class="search-show">
     <search bindsearch="searchValue"></search>
-    <view class="showRes">
-        <view>
-            <text>{{searchResult.name}}</text>
-            <!-- <text>{{}}</text> -->
+    
+    <view class=" {{showRes ? 'showR' : 'init' }}" >
+        <view class="total">
+            <text class="title">{{title}}</text>
+            <text>共 : {{total}}</text>
         </view>
         <view class="poems" >
             <view
-                class="poems-item {{showRes?'':'init'}}"
+                class="poems-item "
                 wx:for="{{searchResult}}" 
                 bindtap="poemDetail"
                 data-id="{{item._id}}"
                 data-author="{{item.author}}"
-            >{{item.name}}</view>
-            <view class=" {{isShow ? 'find' : 'init'}}">未找到!</view>
-            <view class="{{isWait ? 'wait' : 'init'}}">请稍后...</view>
+            >
+            <!-- {{item.name}} -->
+            <text class="item-name">{{item.name}}</text>
+            <text class="item-author">{{item.author}}</text>
+        </view>
         </view>
     </view>
+    <view class=" {{notFind ? 'find' : 'init'}}">未找到!</view>
+    <view class="{{isWait ? 'wait' : 'init'}}">请稍后...</view>
 </view>

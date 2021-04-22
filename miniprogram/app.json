@@ -4,10 +4,9 @@
         "pages/poetry/poetry",
         "pages/personal/personal",
         "pages/games/games",
-        "pages/author/author",
         "pages/coll/coll",
         "pages/search/search",
-        "details/details"
+        "pages/login/login"
     ],
     "window": {
         "backgroundTextStyle": "light",

@@ -7,11 +7,26 @@
 .poems{
     padding: 30rpx;
     background-color: #fff;
+    /* display: flex;
+    justify-content: space-between; */
+}
+.poems .item-name{
+    display: inline-block;
+    width: 50%;
+    text-align: start;
+}
+.poems .item-author{
+    display: inline-block;
+    width: 50%;
+    text-align: end;
 }
 .poems-item{
     line-height: 60rpx;
     font-size: 26rpx;
     border-bottom: 6rpx solid #f2f2f2;
+}
+.showR{
+    display: block;
 }
 .init{
     display: none;
@@ -49,4 +64,19 @@
     to{
         color: #fff;
     }
+}
+
+.total{
+    margin-top: 20rpx;
+    padding: 0 30rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: start;
+    font-size: 28rpx;
+    display: flex;
+    justify-content: space-between;
+    background-color: #f3f3f3;
+}
+.total text{
+    width: 200rpx;
 }

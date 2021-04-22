@@ -11,7 +11,14 @@
             scroll-y="false"
             bindscrolltolower="refreshData"
         >
-            <view class="scrollItem" wx:for="{{types}}" wx:key="index" bindtap="more">
+            <view 
+                class="scrollItem" 
+                wx:for="{{types}}" 
+                wx:key="index" 
+                data-name="{{item.name}}" 
+                data-mainname="{{item.mainName}}"
+                bindtap="cateDetail"
+            >
                 <text>{{item.name}}</text>
             </view>
         </scroll-view>

@@ -21,12 +21,30 @@ Component({
      */
     methods: {
         // 进入分类详情
-        more() {
-            console.log("分类详情");
-        },
-        // 右滑刷新功能
-        refreshData(e) {
-            this.triggerEvent("refresh",);
+        cateDetail(e) {
+            console.log(e);
+            let dataset = e.currentTarget.dataset;
+            
+            // 跳转至搜索结果展示页面
+            wx.navigateTo({
+                url: '/pages/search/search?name=' + dataset.name + "&mainname=" + dataset.mainname,
+            });
+            // 云函数调用
+            //  wx.cloud.callFunction({
+            //      name: 'getPoetsDynasty',
+            //      data: {
+            //          searchKey: dataset.name
+            //      }
+            //  }).then(res => {
+            //      console.log(res);
+            //      wx.navigateTo({
+            //          url: '/pages/search/search?res='+res.result.data,
+            //      })
+            //  }).catch(err => {
+            //      console.log(err);
+            //      console.log("有问题");
+            //  })
+
         }
     }
 })

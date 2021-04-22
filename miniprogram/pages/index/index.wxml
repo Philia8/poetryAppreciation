@@ -8,9 +8,9 @@
         data-id="{{recommandPoem._id}}"
     >
         <!-- 诗句 -->
-        <view class="recommendPeotry">{{recommandPoem.content[0]}}</view>
+        <view class="recommendPeotry">{{recommandPoem.content[1]}}</view>
         <!-- 作者 -->
-        <view class="recommendPoet">--{{recommandPoem.author}}</view>
+        <view class="recommendPoet">{{recommandPoem.author}}</view>
     </view>
 
     <!-- 诗词分类 -->

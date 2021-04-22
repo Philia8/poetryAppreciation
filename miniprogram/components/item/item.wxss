@@ -5,6 +5,8 @@
     display: flex;
     justify-content: space-between;
     padding: 15rpx;
+    border-bottom: 2rpx solid rgba(100, 100, 100, .1);
+    margin-bottom: 2rpx;
 }
 
 .itemSetting .more {

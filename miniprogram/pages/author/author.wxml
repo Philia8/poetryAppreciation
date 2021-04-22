@@ -1,4 +1,0 @@
-<view class="main">
-    <view class="name">{{author.name}}</view>
-    <view class="desc">{{author.desc}}</view>
-</view>

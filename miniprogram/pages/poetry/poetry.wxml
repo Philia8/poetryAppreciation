@@ -8,7 +8,8 @@
         </view>
         <!-- 诗词两句一行 -->
         <view class="content">
-            <view wx:for="{{content}}">{{item}}</view>
+            <!-- 富文本编辑器组件，其中的HTML 标签会被解析 -->
+            <view wx:for="{{content}}"><rich-text nodes="{{item}}" type="text"></rich-text></view>
         </view>
     </view>
     <!-- 作者及收藏 -->
@@ -30,9 +31,10 @@
             <view class="lifetime" wx:if="{{currentIndex === 0}}">{{lifetime}}</view>
             
             <view class="poetryAppre" wx:elif="{{currentIndex === 1}}" >
-                <view wx:for="{{poetryAppre}}">
-                    {{item}}
+                <view wx:if="{{poetryAppre.length > 0}}">
+                    <view wx:for="{{poetryAppre}}" >{{item}}</view>
                 </view>
+                <view class="appreNull" wx:else>暂无赏析内容!</view>
             </view>
             <!-- 所有生平描述 -->
             <view class="describe" wx:else>

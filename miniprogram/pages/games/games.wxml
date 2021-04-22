@@ -1,5 +1,26 @@
-<!-- 游戏区域分为两部分，分别代表两个游戏 -->
-<view class="main">
-    <view>诗词接龙</view>
-    <view>诗词填空</view>
+<!-- 诗词填空游戏 -->
+<view class="container">
+    <view class="main">
+        <view class="top">
+            <view class="score">{{score}}</view>
+        </view>
+        <view class="poem-container">
+            <view>{{gamePoem}}</view>
+        </view>
+        <view class="ans-input">
+            <input type="text" placeholder="请输入你的答案" bindblur="userAns"/>
+            <button size="mini" bindtap="subAns">提交</button>
+            <button size="mini" bindtap="next">下一关</button>
+
+            <!-- <form bindsubmit="subAns">
+                <input type="text" placeholder="请输入你的答案" />
+                <button size="mini" formType="submit">提交</button>
+                <button size="mini" bindtap="next">下一关</button>
+            </form> -->
+        </view>
+        <!-- 诗词详情入口 -->
+        <view class="poem-detail">
+            <button bindtap="poemDetail">点击查看诗词详情</button>
+        </view>
+    </view>
 </view>

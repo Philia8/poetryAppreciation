@@ -48,7 +48,7 @@ Page({
                 content: res.data.content,
                 name: res.data.name,
                 author: res.data.author,
-                poetryAppre:porApp
+                poetryAppre: porApp
             });
         }).catch(err => {
             console.log(err);
@@ -72,7 +72,6 @@ Page({
         this.setData({
             currentIndex: e.currentTarget.dataset.index 
         });
-        // 诗词赏析内容未填充
         if (!this.data.poetryAppre) {
             this.queryPoem(this.data.poem_id);
         }
@@ -93,7 +92,7 @@ Page({
                 crrIdx: itemIndex
             });
         }
-    }
+    },
     // 诗词收藏
     // poetColl(e) {
     //     /**
