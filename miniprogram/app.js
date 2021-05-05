@@ -1,9 +1,4 @@
 App({
-    globalData: {
-        userInfo: {}, //用户个人信息
-        user:{}, //用户小程序中的数据
-        openid:'' //用户ID
-    },
     /**
      * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
      */

@@ -13,8 +13,8 @@ Page({
      */
     onLoad: function (options) {
     },
-    onShow() {
-        wx.checkSession({}).then(res => {
+    async onShow() {
+        await wx.checkSession({}).then(res => {
             // 缓存中获取用户信息
             wx.getStorage({
               key: 'userInfo',

@@ -34,20 +34,16 @@ Page({
     isLogin() {
         wx.checkSession({}).then(res => {
             wx.getStorage({
-                key: 'user',
+                key: 'user_db',
             }).then(res => {
                 // console.log(res);
-                console.log("storeRes");
-                console.log(res);
+                // console.log("storeRes");
+                // console.log(res);
                 this.setData({
                     user: res.data,
                     score: res.data.score
-                    // score:getApp().globalData.user.score
                 });
-                getApp().globalData.user = res.data;
-                getApp().globalData.openid = res.data._openid;
             });
-            console.log(this.data.score);
         }).catch(err => {
             wx.navigateTo({
                 url: '/pages/login/login',
@@ -117,14 +113,7 @@ Page({
             this.setData({
                 score:this.data.score + 2
             })
-            // 更新数据库数据
-            DB_user.where({
-                _openid: this.data.openid
-            }).update({
-                data: {
-                    score: this.data.score
-                }
-            });
+            
             // 下一关
             this.next();
         } else {
@@ -150,27 +139,20 @@ Page({
     },
     // 用户离开页面时更新数据库数据
     onHide() {
-        getApp().globalData.user.score = this.data.score; //更新全局变量
         this.data.user.score = this.data.score; //更新页面数据
         
         // 更新缓存数据
         wx.setStorage({
-          data: this.data.user,
-          key: 'user',
-        })
-        // 更新数据库的数据
-        // wx.removeStorage({
-        //     key: 'user',
-        // });
-        // DB_user.where({
-        //     _openid: this.data.openid
-        // }).get().then(res => {
-        //     console.log("离开页面");
-        //     console.log(res);
-        //     wx.setStorage({
-        //         data: res.data,
-        //         key: 'user',
-        //     });
-        // });
+            data: this.data.user,
+            key: 'user_db',
+        });
+        // 更新数据库数据
+        DB_user.where({
+            _openid: this.data.openid
+        }).update({
+            data: {
+                score: this.data.score
+            }
+        });
     }
 })
