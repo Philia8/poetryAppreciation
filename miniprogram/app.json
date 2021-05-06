@@ -1,12 +1,13 @@
 {
     "pages": [
+        "pages/personal/personal",
         "pages/index/index",
         "pages/poetry/poetry",
-        "pages/personal/personal",
         "pages/games/games",
         "pages/coll/coll",
         "pages/search/search",
-        "pages/login/login"
+        "pages/login/login",
+        "pages/score/score"
     ],
     "window": {
         "backgroundTextStyle": "light",

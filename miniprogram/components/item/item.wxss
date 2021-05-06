@@ -4,7 +4,7 @@
     background-color: #fff;
     display: flex;
     justify-content: space-between;
-    padding: 15rpx;
+    padding: 15rpx 30rpx 15rpx 30rpx;
     border-bottom: 2rpx solid rgba(100, 100, 100, .1);
     margin-bottom: 2rpx;
 }

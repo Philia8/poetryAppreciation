@@ -18,8 +18,8 @@ Page({
             timeout: 5000,
         });
     },
-    getuserinfo(e) {
-        // 获取openid及用户数据
+    // 获取openid及用户数据
+    getuserinfo(e) {    
         wx.cloud.callFunction({
             name: "login"
         }).then(res => {
@@ -48,7 +48,8 @@ Page({
                 DB_user.add({
                     data: {
                         score: 0,
-                        _openid: this.data.openid
+                        _openid: this.data.openid,
+                        checktime:""
                     }
                 }).then(res => {
                     console.log("添加用户成功");
@@ -58,6 +59,8 @@ Page({
                 });
             } else {
                 // 将数据库中的用户信息存入本地缓存中
+                // console.log("登录时本地存储用户信息");
+                // console.log(result);
                 wx.setStorage({
                     key: 'user_db',
                     data: result.data[0],

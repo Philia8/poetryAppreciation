@@ -33,3 +33,6 @@
 }
 
 /* 签到 */
+.check{
+    color: blue
+}
