@@ -1,0 +1,25 @@
+// 将增加积分类型的数字代码转换为文字
+function getCause(num) {
+     switch (num) {
+         case 0:
+             return "游戏加分";
+             break;
+         case 1:
+             return "游戏减分";
+             break;
+         case 2:
+             return "签到加分";
+             break;
+     }
+}
+// 将毫秒数转换为特定的日期格式
+// function getDate(time) {
+//     var d =Date.parse(time);
+    
+//     return dateStr;
+// }
+module.exports = {
+    getCause: getCause,
+    // getDate: getDate,
+    
+}

@@ -1,4 +1,6 @@
+const { getDateStr } = require('../../utils/util.js');
 const DB_user = wx.cloud.database().collection("user");
+const DB_log = wx.cloud.database().collection("log");
 Page({
 
     /**
@@ -16,6 +18,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        const date = new Date();
+        console.log();
     },
     // 获取登录用户的个人信息
     async onShow() {
@@ -51,7 +55,8 @@ Page({
                 _id: this.data.userInfo_db._id
             }).update({
                 data: {
-                    checktime: time_now
+                    checktime: time_now,
+                    score: this.data.userInfo_db.score + 2,
                 }
             }).then(res => {
                 console.log("用户已签到");
@@ -67,7 +72,18 @@ Page({
             }).catch(err => {
                 console.log("用户签到出错");
             });
-            // 更新缓存数据
+            // 插入积分更新记录
+            DB_log.add({
+                data: {
+                    action: "+2",
+                    cause: 2,
+                    time:getDateStr(time_now)
+                }
+            }).then(res => {
+                console.log("签到积分更新记录成功");
+            }).catch(err => {
+                console.log("签到积分更新记录添加出错！");
+            })
         } else { //用户已签到，再次点击签到按钮
             // 判断当前用户点击是否与数据库中存储的时间为同一天，不是则需要更新签到状态为未签到
             // 获取数据库中用户的签到时间
@@ -106,6 +122,12 @@ Page({
             });
         }).catch(err => {
             console.log("个人页面获取数据库中的用户数据出错");
+        })
+    },
+    // 跳转至积分明细
+    goScore() {
+        wx.navigateTo({
+          url: '/pages/score/score'
         })
     }
 })

@@ -1,2 +1,11 @@
-<!--miniprogram/pages/score/score.wxml-->
-<text>miniprogram/pages/score/score.wxml</text>
+<wxs module="util" src="./util.wxs" />
+<view>
+    <view wx:for="{{details}}" class="score-item">
+        <!-- {{item}} -->
+        <view class="left">
+            <view class="cause">{{util.getCause(item.cause)}}</view>
+            <view class="time">{{item.time}}</view>
+        </view>
+        <view class="right">{{item.action}}</view>
+    </view>
+</view>

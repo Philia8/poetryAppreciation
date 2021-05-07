@@ -1,1 +1,19 @@
-/* miniprogram/pages/score/score.wxss */
+/* 积分明细 */
+.score-item{
+    font-size: 30rpx;
+    display: flex;
+    padding: 10rpx 20rpx;
+    justify-content: space-between;
+    border-bottom: 3rpx solid #bbbbbb;
+    height: 90rpx;
+    /* line-height: 50rpx; */
+}
+.left .time{
+    color: #aaaaaa;
+    font-size: 20rpx;
+    margin-top: 8rpx;
+}
+.right{
+    color: blue;
+    line-height: 90rpx;
+}

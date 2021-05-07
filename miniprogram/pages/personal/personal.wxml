@@ -13,7 +13,7 @@
         <item wx:else class="signIn check" propFunc="已签到"  icon="√"></item>    
     </view>
     <!-- 个人积分 -->
-    <item class="grade" propFunc="个人积分"  icon=">"></item>
+    <item class="grade" propFunc="个人积分"  icon=">" bindtap="goScore"></item>
     <!-- 我的收藏 -->
     <!-- <item class="collection" propFunc="我的收藏" bindtap="mycolls"  icon=">"></item> -->
     <!-- 个人创作 -->
