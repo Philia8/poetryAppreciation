@@ -5,7 +5,9 @@
             <view class="score">{{score}}</view>
         </view>
         <view class="poem-container">
-            <view>{{gamePoem}}</view>
+            <view>
+                <rich-text nodes=" {{gamePoem}}" type="text"></rich-text>
+            </view>
         </view>
         <view class="ans-input">
             <input type="text" placeholder="请输入你的答案" bindblur="userAns"/>
