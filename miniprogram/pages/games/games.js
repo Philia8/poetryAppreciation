@@ -1,5 +1,7 @@
 // pages/games/games.js
+const { getDateStr } = require("../../utils/util.js");
 const DB_user = wx.cloud.database().collection("user");
+const DB_log = wx.cloud.database().collection("log");
 Page({
 
     /**
@@ -111,9 +113,10 @@ Page({
               title: '答对了！',
             })
             this.setData({
-                score:this.data.score + 2
-            })
-            
+                score: this.data.score + 2
+            });
+            // 存储积分明细
+            this.setScoreDetail(new Date().getTime());
             // 下一关
             this.next();
         } else {
@@ -153,6 +156,20 @@ Page({
             data: {
                 score: this.data.score
             }
+        });
+    },
+    // 存储积分明细
+    setScoreDetail(time_now) {
+        DB_log.add({
+            data: {
+                action: "+2",
+                cause: 0,
+                time: getDateStr(time_now)
+            }
+        }).then(res => {
+            console.log("游戏积分更新记录成功");
+        }).catch(err => {
+            console.log("游戏积分更新记录添加出错！");
         });
     }
 })
