@@ -35,6 +35,7 @@ Page({
         this.getTypes && this.getTypes("类型");
         this.getTypes && this.getTypes("作者");
     },
+    // 跳转至搜索页面
     searchHandler(e) {
         wx.navigateTo({
             url: '/pages/search/search'
@@ -52,28 +53,20 @@ Page({
     },
     // 随机古诗词获取
     randomPoem() {
-        // 从唐诗三百首中随机推荐诗词
-        const random = Math.round(Math.random() * 1000); //随机数
+        // 调用云函数返回随机选择的诗句
         wx.cloud.callFunction({
             name: "getCatePoems",
             data: {
-                searchKey:"唐诗三百首"
+                searchKey: "唐诗三百首"
             }
         }).then(res => {
+            // console.log(res);
             this.setData({
-                recommandPoem: res.result.data[random]
+                recommandPoem: res.result
             });
         }).catch(err => {
             console.log(err);
-        })
-        // DB_poems.where({
-        //     type: "唐诗三百首"
-        // }).get().then(res => {
-        //     // console.log(res);
-            
-        // }).catch(err => {
-        //     console.log(err);
-        // });
+        });
     },
     // 获取所有朝代
     getTypes(mainName) {
@@ -103,12 +96,5 @@ Page({
         }).catch(err => {
             console.log(err);
         })
-    },
-    // 右拉刷新
-    refreshHandler(e) {
-            // console.log("HHH");
-        this.getTypes(e.currentTarget.dataset.type);
-        // console.log(this.data.theme);
-        // 当前问题:从数据库中取数据始终取到相同的数据集,需要进行分批显示
     }
 })

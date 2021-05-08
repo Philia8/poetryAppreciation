@@ -126,8 +126,9 @@ Page({
     },
     // 跳转至积分明细
     goScore() {
+        console.log(this.data.userInfo_db._openid);
         wx.navigateTo({
-          url: '/pages/score/score'
-        })
+            url: '/pages/score/score?openid=' + this.data.userInfo_db._openid
+        });
     }
 })
