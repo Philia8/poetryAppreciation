@@ -15,6 +15,6 @@
 
     <!-- 诗词分类 -->
     <category prop-category-header="朝代" types="{{dynasty}}" data-type="朝代"></category>
-    <category prop-category-header="题材" types="{{theme}}" data-type="题材" bind:refresh="refreshHandler"></category>
+    <category prop-category-header="题材" types="{{theme}}" data-type="题材"></category>
     <category prop-category-header="诗人" types="{{poets}}" data-type="诗人"></category>
 </view>

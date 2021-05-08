@@ -55,7 +55,7 @@ Page({
     randomPoem() {
         // 调用云函数返回随机选择的诗句
         wx.cloud.callFunction({
-            name: "getCatePoems",
+            name: "getGamePoem",
             data: {
                 searchKey: "唐诗三百首"
             }

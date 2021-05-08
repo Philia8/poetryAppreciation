@@ -9,7 +9,7 @@ exports.main = async (event, context) => {
     const result = await DB_poems.where({
         author: event.searchKey
     }).count();
-    const total = result.total;
+    const total = parseInt(result.total);
     // 计算需分几次取
     const batchTimes = Math.ceil(total / 100);
     // 承载所有读操作的 promise 的数组

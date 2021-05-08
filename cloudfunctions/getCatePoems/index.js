@@ -5,6 +5,7 @@ cloud.init({
 const DB_poems = cloud.database().collection("poems");
 const MAX_LIMIT = 100
 exports.main = async (event, context) => {
+    console.log(event.searchKey);
     // 先取出记录总数
     const result = await DB_poems.where({
         ['tags']: event.searchKey
