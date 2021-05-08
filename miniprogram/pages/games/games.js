@@ -59,19 +59,18 @@ Page({
         */
         // 从唐诗三百首中随机推荐诗词
         wx.cloud.callFunction({
-            name: "getCatePoems",
+            name: "getGamePoem",
             data: {
                 searchKey: "唐诗三百首"
             }
         }).then(res => {
             console.log(res);
-            const random = parseInt(Math.random() * 600);
-            // console.log("random = " + random);
+            // 调用云函数随机获取一句诗词
             this.setData({
-                poems: res.result.data,
-                gamePoem: res.result.data[random].content[1],
-                poemId: res.result.data[random]._id,
-                poemAuthor:res.result.data[random].author
+                poems: res.result,
+                gamePoem: res.result.content[1],
+                poemId: res.result._id,
+                poemAuthor:res.result.author
             });
             this.game();
         }).catch(err => {
@@ -92,6 +91,7 @@ Page({
         console.log(ss);
         if (ss === ',' || ss === '，') {
             this.game();
+            return;
         } else {
             this.setData({
                 gamePoem: arr.join(''),
@@ -101,7 +101,7 @@ Page({
     },
     // 获取并存储用户输入的答案
     userAns(e) {
-        console.log(e);
+        // console.log(e);
         this.setData({
             usrAns: e.detail.value
         })
