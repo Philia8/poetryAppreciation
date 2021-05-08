@@ -1,9 +1,9 @@
 {
     "pages": [
-        "pages/personal/personal",
         "pages/index/index",
-        "pages/poetry/poetry",
         "pages/games/games",
+        "pages/personal/personal",
+        "pages/poetry/poetry",
         "pages/coll/coll",
         "pages/search/search",
         "pages/login/login",
