@@ -33,6 +33,7 @@ Page({
             });
             this.getDataByDB();
         });
+        // 获取登录用户的授权信息
         this.getInfo();
     },
     // 获取数据库中的用户数据
@@ -48,7 +49,7 @@ Page({
                 DB_user.add({
                     data: {
                         score: 0,
-                        _openid: this.data.openid,
+                        // userid: this.data.openid,
                         checktime:""
                     }
                 }).then(res => {

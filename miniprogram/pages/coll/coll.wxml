@@ -5,7 +5,7 @@
             <view  class="coll-item" wx:for="{{collData}}" catchtap="goPoemDetail" data-id="{{item.poem_id}}"
                 data-author="{{item.author}}">
                 <view class="coll-name">{{item.poem_name}}</view>
-                <view class="coll-pre">{{item.content}}</view>
+                <view class="coll-pre"><rich-text nodes="{{item.content}}" type="text"></rich-text></view>
                 <view class="coll-author">{{item.author}}</view>
                 <view class="coll-time">{{item.coll_time}}</view>
             </view>

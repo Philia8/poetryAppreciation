@@ -39,8 +39,8 @@ Page({
                 key: 'user_db',
             }).then(res => {
                 // console.log(res);
-                // console.log("storeRes");
-                // console.log(res);
+                console.log("storeRes");
+                console.log(res);
                 this.setData({
                     user: res.data,
                     score: res.data.score
@@ -90,7 +90,7 @@ Page({
         let ss = arr.splice(random, 1, '__');
         console.log(ss);
         if (ss === ',' || ss === '，') {
-            this.game();
+            this.getPoem();
             return;
         } else {
             this.setData({

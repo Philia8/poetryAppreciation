@@ -18,13 +18,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        const date = new Date();
-        console.log();
     },
     // 获取登录用户的个人信息
     async onShow() {
         await wx.checkSession({}).then(res => {
-            // 缓存中获取用户信息
+            // 获取用户的登录信息
             wx.getStorage({
                 key: 'userInfo',
             }).then(res => {
@@ -32,7 +30,7 @@ Page({
                     userInfos: res.data
                 });
             });
-            // 获取本地缓存中的用户信息
+            // 获取用户在数据库中的游戏相关信息
             this.getInfosByStorage();
         }).catch(err => { //未登录则跳转登陆页面
             wx.navigateTo({
@@ -60,9 +58,14 @@ Page({
                 }
             }).then(res => {
                 console.log("用户已签到");
-                // 更新缓存中的签到时间
+                 // 更新缓存数据
+                 let temp = this.data.userInfo_db;
+                 temp.score += 2;
+                 this.setData({
+                     userInfo_db: temp
+                 });
                 wx.setStorage({
-                    data: this.data.userInfo_db,
+                    data: temp,
                     key: 'user_db',
                 });
                 // 签到成功提醒
@@ -100,12 +103,13 @@ Page({
         return new Date(time_old).toDateString() === new Date().toDateString();
     },
     // 获取本地缓存中的用户数据
+    // 获取用户在数据库中的游戏相关信息
     getInfosByStorage() {
         wx.getStorage({
             key: 'user_db',
         }).then(res => {
             // console.log(res);
-            this.getDataByDB(res.data._id);
+            this.getDataByDB(res.data._id); //
         }).catch(err => {
             console.log("个人页面获取用户本地缓存数据出错");
             console.log(err);
