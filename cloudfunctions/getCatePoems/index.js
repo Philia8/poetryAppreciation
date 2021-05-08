@@ -21,11 +21,17 @@ exports.main = async (event, context) => {
         // skip 方法,从指定索引查找数据,根据i 值每次更新开始的索引,分次拿出所有数据
         tasks.push(promise);
     }
-    // 等待所有
-    return (await Promise.all(tasks)).reduce((acc, cur) => {
+    const random = parseInt(Math.random() * 600);
+    console.log(random);
+    let res = (await Promise.all(tasks)).reduce((acc, cur) => {
         return {
             data: acc.data.concat(cur.data),
             errMsg: acc.errMsg,
         }
-    })
+    });
+    // console.log(res.data);
+    let poem = res.data[random];
+    // console.log(poem);
+    // 等待所有
+    return Promise.resolve(poem);
 }
