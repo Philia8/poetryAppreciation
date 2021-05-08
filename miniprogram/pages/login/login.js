@@ -19,22 +19,23 @@ Page({
         });
     },
     // 获取openid及用户数据
-    getuserinfo(e) {    
-        wx.cloud.callFunction({
+    async getuserinfo(e) {
+            // 获取登录用户的授权信息
+            this.getInfo();
+        await wx.cloud.callFunction({
             name: "login"
         }).then(res => {
             // 存储当前用户的openid
-            wx.setStorage({
+             wx.setStorage({
                 data: res.result.openid,
                 key: 'openid',
             });
             this.setData({
                 openid: res.result.openid
             });
+            // 获取用户数据库信息
             this.getDataByDB();
         });
-        // 获取登录用户的授权信息
-        this.getInfo();
     },
     // 获取数据库中的用户数据
     getDataByDB() {

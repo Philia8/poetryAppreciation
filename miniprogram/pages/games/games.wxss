@@ -27,7 +27,7 @@
     position: fixed;
     bottom: 500rpx;
     left: 100rpx;
-    height: 100rpx;
+    height: 150rpx;
 }
 .ans-input input{
     width: 280rpx;
