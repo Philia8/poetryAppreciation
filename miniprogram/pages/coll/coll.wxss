@@ -1,1 +1,33 @@
-/* miniprogram/pages/coll/coll.wxss */
+.main{
+    background-color: #cccccc;
+    padding: 5rpx 15rpx;
+}
+.coll-container{
+    /* background-color: #ffffff; */
+    margin-top: 15rpx;
+}
+.coll-item{
+    background-color: #ffffff;
+    border-radius: 28rpx;
+    font-size: 30rpx;
+    padding:20rpx;
+    margin:20rpx 0;
+    border: 2rpx solid transparent;
+}
+.coll-name{
+    text-align: start;
+    font-weight: bolder;
+}
+.coll-pre{
+    margin-top: 5rpx;
+    padding-left: 20rpx;
+    font-size: 28rpx;
+}
+.coll-author{
+    text-align: end;
+    font-size: 26rpx;
+}
+.coll-time{
+    font-size: 20rpx;
+    color: #444444;
+}

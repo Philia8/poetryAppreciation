@@ -15,7 +15,7 @@
     <!-- 个人积分 -->
     <item class="grade" propFunc="个人积分"  icon=">" bindtap="goScore"></item>
     <!-- 我的收藏 -->
-    <!-- <item class="collection" propFunc="我的收藏" bindtap="mycolls"  icon=">"></item> -->
+    <item class="collection" propFunc="我的收藏" bindtap="goMyColl" icon=">"></item>
     <!-- 个人创作 -->
     <!-- <item class="creation" propFunc="个人创作"  icon=">"></item> -->
 </view>

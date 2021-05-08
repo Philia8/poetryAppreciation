@@ -1,66 +1,51 @@
-// miniprogram/pages/coll/coll.js
+const DB_colls = wx.cloud.database().collection("collections");
+const DB_poems = wx.cloud.database().collection("poems");
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        collData:[], //所有收藏记录
+        userid:"", //openid
+        showEmpty:false //未收藏时显示
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-
+    onLoad: async function (query) {
+        this.setData({
+            userid: query.openid
+        });
+        await this.getColls();
     },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+    onShow() {
+        this.getColls();  
     },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
+    // 获取所有收藏记录
+    getColls() {
+        DB_colls.where({
+            _openid: this.data.userid
+        }).get().then(res => {
+            if (res.data.length === 0) {
+                this.setData({
+                    showEmpty: true
+                });
+            } else {
+                this.setData({
+                    collData: res.data.reverse(),
+                    showEmpty:false
+                });
+            }
+        });
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    // 进入诗词详情页
+    goPoemDetail(e) {
+        wx.navigateTo({
+            //查询参数为诗词ID
+            url: "/pages/poetry/poetry?id=" + e.currentTarget.dataset.id +
+                "&author=" + e.currentTarget.dataset.author
+        })
     }
 })

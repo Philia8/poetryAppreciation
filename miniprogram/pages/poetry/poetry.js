@@ -4,6 +4,7 @@
 const DB_poems = wx.cloud.database().collection("poems");
 const DB_colls = wx.cloud.database().collection("collections");
 const DB_poets = wx.cloud.database().collection("poems-authors");
+let { getDateStr }  = require('../../utils/util');
 Page({
 
     /**
@@ -12,8 +13,8 @@ Page({
     data: {
         name:"", //诗名
         content: [], //诗词中所有数据
-        poem_id:"",  //诗
-        isShow: true, //已收藏按钮样式是否显示
+        poem_id:"",  //诗的id
+        isShow: true, //收藏按钮样式是否显示
         author:"", //作者
         currentIndex: 0, //记录当前是诗人或诗词赏析的索引
         type: ["诗人详情", "诗词赏析", "诗人故事"],
@@ -22,21 +23,67 @@ Page({
         describe:[], //诗人更多故事
         currentIndex:0, //当前活跃type
         crrIdx : 0, //当前点击详情的index
+        userid:"" //登录用户的openid
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (query) {
+    onLoad: async function (query) {
         this.setData({
             poem_id: query.id,
             author:query.author
         });
-        /*
-            函数执行之间有关联，所以在执行顺序和执行时机上需要设计
-        */
-        this.queryPoem && this.queryPoem(this.data.poem_id); //获取诗词详情
-        this.queryPoetDesc && this.data.author && this.queryPoetDesc(this.data.author); //获取诗人详情
+        await this.queryPoem(this.data.poem_id); //获取诗词详情
+        await this.data.author && this.queryPoetDesc(this.data.author); //获取诗人详情
+        // 获取缓存，主要需要登录用户的openid
+        wx.getStorage({
+            key: 'user_db',
+        }).then(res => {
+            // console.log(res);
+            this.setData({
+                userid: res.data._openid
+            });
+        }).catch(err => {
+            console.log("诗词详情页面获取本地缓存出错");
+        });
+        // 查询是否已收藏，设置收藏按钮样式
+        DB_colls.where({
+            poem_id:this.data.poem_id
+        }).get().then(res => {
+            console.log(res);
+            if (res.data.length === 0) { //说明未收藏，则显示收藏 按钮
+                this.setData({
+                    isShow: true
+                });
+            } else {
+                this.setData({
+                    isShow: false
+                });
+            }
+        }).catch(err => {
+            console.log("诗词详情页面检查是否已收藏出错");
+        })
+    },
+    // 每次页面加载时都判断当前诗词是否被收藏过
+    onShow() {
+        // 查询是否已收藏，设置收藏按钮样式
+        DB_colls.where({
+            poem_id: this.data.poem_id
+        }).get().then(res => {
+            // console.log(res);
+            if (res.data.length === 0) {
+                this.setData({
+                    isShow: true
+                });
+            } else {
+                this.setData({
+                    isShow: false
+                });
+            }
+        }).catch(err => {
+            console.log("诗词详情页面检查是否已收藏出错");
+        })
     },
     // 诗词信息
     queryPoem(id) {
@@ -93,37 +140,55 @@ Page({
             });
         }
     },
-    // 诗词收藏
-    // poetColl(e) {
-    //     /**
-    //      * 进入该页面时可获取诗词id，查询该ID是否在collections 集合中，不在则加入，否则删除；
-    //      * 更新收藏按钮对应的isShow 值；
-    //      */
-    //     DB_colls.where({
-    //         poet_id: this.data.poetid
-    //     }).get().then(res => {
-    //         console.log("已收藏");
-    //         this.setData({
-    //             // 显示收藏按钮
-    //             isShow: !this.data.isShow
-    //         });
-    //         this.rmColl(res.data[0]._id);
-    //     }).catch(err => {
-    //         console.log("未收藏");
-    //         this.setData({
-    //             isShow: false
-    //         });
-    //         this.coll();
-    //     });
-    // },
+    // 点击已收藏按钮，则取消收藏
+    poetColl(e) {
+        // 通过判断isShow 的值（收藏按钮是否显示） 来判断当前诗词是否被收藏
+        if (this.data.isShow) {
+            this.coll(this.data.poem_id);
+            this.setData({
+                isShow: !this.data.isShow
+            });
+        } else {
+            // 已收藏则取消收藏，并删除收藏记录
+            console.log("将取消收藏");
+            this.setData({
+                // 显示收藏按钮
+                isShow: !this.data.isShow
+            });
+            // 删除数据库中的收藏记录
+            this.rmColl(this.data.poem_id,this.data.userid);
+        }
+    },
     // 添加收藏
-    // coll()x
+    coll(id) {
+        DB_colls.add({
+            data: {
+                coll_time: getDateStr(new Date().getTime()),
+                poem_id: id,
+                poem_name: this.data.name,
+                author: this.data.author,
+                content:this.data.content[0]
+            }
+        }).then(res => {
+            console.log("收藏记录添加成功");
+        }).catch(err => {
+            console.log("收藏记录添加失败");
+        })
+    },
     // 取消收藏
-    // rmColl(id) {
-    //     DB_colls.doc(id).remove().then(res => {
-    //         console.log("取消收藏成功");
-    //     }).catch(err => {
-    //         console.log("取消收藏失败");
-    //     })
-    // }
+    rmColl(poemid,userid) {
+        DB_colls.where({
+            poem_id: poemid,
+            _openid: userid            
+        }).remove().then(res => {
+            console.log("删除收藏记录成功");
+        }).catch(err => {
+            console.log("删除收藏记录失败");
+        })
+        // DB_colls.doc(id).remove().then(res => {
+        //     console.log("取消收藏成功");
+        // }).catch(err => {
+        //     console.log("取消收藏失败");
+        // })
+    }
 })

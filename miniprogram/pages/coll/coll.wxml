@@ -1,5 +1,15 @@
 <!-- 我的收藏 -->
 <view class="main">
-    <view class="title">我的收藏</view>
-    <view class="content"></view>
+    <view class="coll-container">
+        <block wx:if="!showEmpty">
+            <view  class="coll-item" wx:for="{{collData}}" catchtap="goPoemDetail" data-id="{{item.poem_id}}"
+                data-author="{{item.author}}">
+                <view class="coll-name">{{item.poem_name}}</view>
+                <view class="coll-pre">{{item.content}}</view>
+                <view class="coll-author">{{item.author}}</view>
+                <view class="coll-time">{{item.coll_time}}</view>
+            </view>
+        </block>
+        <view wx:else class="coll-empty">您还没有收藏</view>
+    </view>
 </view>

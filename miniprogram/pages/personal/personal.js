@@ -126,9 +126,15 @@ Page({
     },
     // 跳转至积分明细
     goScore() {
-        console.log(this.data.userInfo_db._openid);
+        // console.log(this.data.userInfo_db._openid);
         wx.navigateTo({
             url: '/pages/score/score?openid=' + this.data.userInfo_db._openid
+        });
+    },
+    // 进入我的收藏
+    goMyColl() {
+        wx.navigateTo({
+            url: '/pages/coll/coll?openid=' + this.data.userInfo_db._openid,
         });
     }
 })
