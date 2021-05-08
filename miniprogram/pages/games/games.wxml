@@ -13,16 +13,10 @@
             <input type="text" placeholder="请输入你的答案" bindblur="userAns"/>
             <button size="mini" bindtap="subAns">提交</button>
             <button size="mini" bindtap="next">下一关</button>
-
-            <!-- <form bindsubmit="subAns">
-                <input type="text" placeholder="请输入你的答案" />
-                <button size="mini" formType="submit">提交</button>
-                <button size="mini" bindtap="next">下一关</button>
-            </form> -->
         </view>
         <!-- 诗词详情入口 -->
         <view class="poem-detail">
-            <button bindtap="poemDetail">点击查看诗词详情</button>
+            <button bindtap="goPoemDetail">点击查看诗词详情</button>
         </view>
     </view>
 </view>

@@ -116,9 +116,9 @@ Page({
                 score: this.data.score + 2
             });
             // 存储积分明细
-            this.setScoreDetail(new Date().getTime());
+            this.setScoreDetail(new Date().getTime(),"+2",0);
             // 下一关
-            this.next();
+            this.getPoem();
         } else {
             wx.showToast({
                 title: '答错了！',
@@ -128,7 +128,30 @@ Page({
     },
     // 下一关
     next() {
-        this.getPoem();
+        
+        // 直接点击下一关-1
+        wx.showModal({
+            cancelColor: '#bfa',
+            title: "放弃本关将 -1"
+        }).then(res => {
+            if (res.confirm) {
+                if (this.data.score < 1) {
+                    wx.showToast({
+                        title: '您的积分不足',
+                        icon:"error"
+                    });
+                } else {
+                    // 扣除积分
+                    this.setData({
+                        score: this.data.score - 1
+                    });
+                    console.log("用户选择进入下一关");
+                    this.getPoem();
+                }
+            } else {
+                console.log("用户未选择进入下一关");
+            }
+        });
     }
     ,
     // 跳转至诗词详情
@@ -159,11 +182,17 @@ Page({
         });
     },
     // 存储积分明细
-    setScoreDetail(time_now) {
+    /**
+     * 
+     * @param {String} time_now 时间戳
+     * @param {String} action +2 游戏得分，+2 签到积分，-3 道具扣分 
+     * @param {Number} cause  0 游戏得分,1 游戏扣分,2 签到得分
+     */
+    setScoreDetail(time_now,action,cause) {
         DB_log.add({
             data: {
-                action: "+2",
-                cause: 0,
+                action: action,
+                cause: cause,
                 time: getDateStr(time_now)
             }
         }).then(res => {
@@ -171,5 +200,35 @@ Page({
         }).catch(err => {
             console.log("游戏积分更新记录添加出错！");
         });
+    },
+    // 用户点击查看诗词详情，有偿
+    goPoemDetail() {
+        const time_now = new Date().getTime();
+            wx.showModal({
+                cancelColor: '#bfa',
+                title: "查看答案需要 -3哦"
+            }).then(res => {
+                if (res.confirm) {
+                     if (this.data.score < 3) {
+                         wx.showToast({
+                             title: '您的积分不够哦',
+                             icon:"error"
+                         });
+                     } else {
+                        this.setData({
+                            score: this.data.score - 3
+                        });
+                        this.poemDetail();
+                        console.log("用户查看答案扣分成功！");
+                        // 存储积分明细
+                        this.setScoreDetail(time_now, "-3", 1);
+                     }
+                } else {
+                    console.log("用户未选择查看答案！");
+                }
+            }).catch(err => {
+                console.log("用户查看答案扣分失败！");
+            })
+        
     }
 })
