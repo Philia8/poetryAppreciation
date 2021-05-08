@@ -11,7 +11,10 @@ exports.main = async (event, context) => {
     }).count();
     const total = parseInt(result.total);
     // 计算需分几次取
-    const batchTimes = Math.ceil(total / 100);
+    let batchTimes = Math.ceil(total / 100);
+    // if (batchTimes > 12) {
+    //     batchTimes = 12;
+    // }
     // 承载所有读操作的 promise 的数组
     const tasks = [];
     for (let i = 0; i < batchTimes; i++) {

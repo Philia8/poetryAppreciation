@@ -119,12 +119,13 @@ Page({
                 searchKey: searchKey
             }
         }).then(res => {
+            console.log(res);
             this.setData({
-                searchResult: res.result.data,
                 showRes: true,
+                searchResult: res.result.data,
                 total: res.result.data.length,
-                isWait:false
-            })
+                isWait: false
+            });
         }).catch(err => {
             console.log("未找到");
             this.setData({
