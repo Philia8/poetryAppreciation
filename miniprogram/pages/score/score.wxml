@@ -1,11 +1,13 @@
 <wxs module="util" src="./util.wxs" />
-<view>
-    <view wx:for="{{details}}" class="score-item">
-        <!-- {{item}} -->
-        <view class="left">
+<!-- <block wx:if="{{showDetails}}"> -->
+    <view wx:for="{{details}}" class="score-item" wx:key="item.time">
+        <view class="left">{{index + 1}}</view>
+        <view class="center">
             <view class="cause">{{util.getCause(item.cause)}}</view>
             <view class="time">{{item.time}}</view>
         </view>
         <view class="right">{{item.action}}</view>
     </view>
-</view>
+    <!-- <view>仅显示100条记录！</view> -->
+<!-- </block> -->
+<!-- <view wx:else>暂时没有记录哦！</view> -->

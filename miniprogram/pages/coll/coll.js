@@ -7,37 +7,56 @@ Page({
      */
     data: {
         collData:[], //所有收藏记录
-        userid:"", //openid
-        showEmpty:false //未收藏时显示
+        userid:'', //用户的 openid
+        showEmpty:true //未收藏时显示
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: async function (query) {
+    onLoad: function (query) {
         this.setData({
             userid: query.openid
         });
-        await this.getColls();
+        // this.getColls();
     },
-    onShow() {
-        this.getColls();  
+    async onShow() {
+        this.getUserid();
+    },
+    //  获取缓存中的用户openid
+    getUserid() {
+        wx.getStorage({
+            key: 'userid',
+        }).then(res => {
+            // console.log(res);
+            this.setData({
+                userid: res.data
+            });
+            // 获取用户的收藏记录
+                this.getColls();
+        })
     },
     // 获取所有收藏记录
     getColls() {
-        DB_colls.where({
-            _openid: this.data.userid
-        }).get().then(res => {
-            if (res.data.length === 0) {
-                this.setData({
-                    showEmpty: true
-                });
-            } else {
-                this.setData({
-                    collData: res.data.reverse(),
-                    showEmpty:false
-                });
+        wx.cloud.callFunction({
+            name: 'getColPoems',
+            data: {
+                openid:this.data.userid
             }
+        }).then(res => {
+            console.log("获取用户收藏诗词成功！");
+            console.log(res);
+            this.setData({
+                collData: res.result.data,
+                showEmpty: false
+            });
+        }).catch(err => {
+            this.setData({
+                showEmpty: true
+            });
+            console.log("收藏列表为空："+this.data.showEmpty);
+            console.log("获取用户收藏诗词出错！");
+            console.log(err);
         });
     },
     // 进入诗词详情页

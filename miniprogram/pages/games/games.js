@@ -8,8 +8,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        openid:'', //用户ID
-        user:{}, //用户数据
+        userid:'', //用户ID
+        userInfo_db:{}, //用户数据
         score:0, //用户分数
         poems: [],
         gamePoem: "",
@@ -32,25 +32,49 @@ Page({
         // 判断是否登录并获取用户信息
         this.isLogin();
     },
-    // 判断是否进行登录
+    // 判断是否登录
     isLogin() {
+        // 检测登录状态并获取用户的信息
         wx.checkSession({}).then(res => {
+            // 获取用户的登录信息
             wx.getStorage({
-                key: 'user_db',
+                key: 'userInfo',
             }).then(res => {
-                // console.log(res);
-                console.log("storeRes");
-                console.log(res);
-                this.setData({
-                    user: res.data,
-                    score: res.data.score
-                });
+                // 获取用户openid
+                this.getUserid();
             });
-        }).catch(err => {
+        }).catch(err => { //未登录则跳转登陆页面
             wx.navigateTo({
                 url: '/pages/login/login',
             });
+        });
+    },
+    //  获取缓存中的用户openid
+    getUserid() {
+        wx.getStorage({
+            key: 'userid',
+        }).then(res => {
+            // console.log(res);
+            this.setData({
+                userid: res.data
+            });
+            // 获取用户在数据库中的游戏相关信息
+            this.getInfosByDB(res.data);
         })
+    },
+    // 获取用户的数据库信息
+    getInfosByDB(userid) {
+        DB_user.where({
+            _openid: userid
+        }).get().then(res => {
+            // console.log(res);
+            this.setData({
+                userInfo_db: res.data[0],
+                score:res.data[0].score
+            });
+        }).catch(err => {
+            console.log("个人中心获取用户数据库信息失败！");
+        });
     },
     // 获取一句诗词
     getPoem() {
@@ -79,18 +103,14 @@ Page({
     },
     // 游戏逻辑
     game() {
-         /* 
-            如何保证游戏的随机性?
-            通过1~1000的随机数，在数组中选择一句诗词，取出其中一个字
-        */
-         const random = parseInt(Math.random() * 10);
+        const random = parseInt(Math.random() * 10);
         let arr = this.data.gamePoem.split('');
         // console.log(arr);
         //  被删除的填词答案
         let ss = arr.splice(random, 1, '__');
         console.log(ss);
         if (ss === ',' || ss === '，') {
-            this.getPoem();
+            this.game();
             return;
         } else {
             this.setData({
@@ -132,7 +152,7 @@ Page({
         // 直接点击下一关-1
         wx.showModal({
             cancelColor: '#bfa',
-            title: "放弃本关将 -1"
+            title: "放弃本关 积分-1"
         }).then(res => {
             if (res.confirm) {
                 if (this.data.score < 1) {
@@ -145,6 +165,18 @@ Page({
                     this.setData({
                         score: this.data.score - 1
                     });
+                    DB_log.add({
+                        data: {
+                            cause: 1,
+                            action: "-1",
+                            time: getDateStr(new Date().getTime())
+                        }
+                    }).then(res => {
+                        console.log("下一关积分明细更新成功！");
+                    }).catch(err => {
+                        console.log("下一关积分明更新失败！");
+                    })
+                    console.log(this.data.score);
                     console.log("用户选择进入下一关");
                     this.getPoem();
                 }
@@ -152,8 +184,37 @@ Page({
                 console.log("用户未选择进入下一关");
             }
         });
-    }
-    ,
+    },
+    // 用户点击查看诗词详情，有偿
+    goPoemDetail() {
+        const time_now = new Date().getTime();
+        wx.showModal({
+            cancelColor: '#bfa',
+            title: "查看答案积分-3"
+        }).then(res => {
+            if (res.confirm) {
+                if (this.data.score < 3) {
+                    wx.showToast({
+                        title: '您的积分不够哦',
+                        icon: "error"
+                    });
+                } else {
+                    this.setData({
+                        score: this.data.score - 3
+                    });
+                    this.poemDetail();
+                    console.log("用户查看答案扣分成功！");
+                    // 存储积分明细
+                    this.setScoreDetail(time_now, "-3", 1);
+                }
+            } else {
+                console.log("用户未选择查看答案！");
+            }
+        }).catch(err => {
+            console.log("用户查看答案扣分失败！");
+        })
+
+    },
     // 跳转至诗词详情
     poemDetail(e) {
         // console.log(e);
@@ -165,21 +226,10 @@ Page({
     },
     // 用户离开页面时更新数据库数据
     onHide() {
-        this.data.user.score = this.data.score; //更新页面数据
-        
-        // 更新缓存数据
-        wx.setStorage({
-            data: this.data.user,
-            key: 'user_db',
-        });
-        // 更新数据库数据
-        DB_user.where({
-            _openid: this.data.openid
-        }).update({
-            data: {
-                score: this.data.score
-            }
-        });
+        this.updateDataForDB();
+    },
+    onUnload() {
+        this.updateDataForDB();
     },
     // 存储积分明细
     /**
@@ -201,34 +251,20 @@ Page({
             console.log("游戏积分更新记录添加出错！");
         });
     },
-    // 用户点击查看诗词详情，有偿
-    goPoemDetail() {
-        const time_now = new Date().getTime();
-            wx.showModal({
-                cancelColor: '#bfa',
-                title: "查看答案需要 -3哦"
-            }).then(res => {
-                if (res.confirm) {
-                     if (this.data.score < 3) {
-                         wx.showToast({
-                             title: '您的积分不够哦',
-                             icon:"error"
-                         });
-                     } else {
-                        this.setData({
-                            score: this.data.score - 3
-                        });
-                        this.poemDetail();
-                        console.log("用户查看答案扣分成功！");
-                        // 存储积分明细
-                        this.setScoreDetail(time_now, "-3", 1);
-                     }
-                } else {
-                    console.log("用户未选择查看答案！");
-                }
-            }).catch(err => {
-                console.log("用户查看答案扣分失败！");
-            })
-        
+    // 更新个人积分
+    updateDataForDB() {
+        // 更新数据库数据
+        DB_user.where({
+            _openid: this.data.userid
+        }).update({
+            data: {
+                score: this.data.score
+            }
+        }).then(res => {
+            console.log("游戏页面积分更新完成");
+        }).catch(err => {
+            console.log("游戏页面积分更新失败！");
+            console.log(err);
+        });
     }
 })

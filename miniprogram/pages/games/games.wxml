@@ -2,7 +2,7 @@
 <view class="container">
     <view class="main">
         <view class="top">
-            <view class="score">{{score}}</view>
+            <view class="score">当前积分：{{score}}</view>
         </view>
         <view class="poem-container">
             <view>

@@ -36,5 +36,8 @@ App({
      */
     onError: function(msg) {
 
-    }
+    },
+    globalData:{
+        userid:'' //存储用户的openid
+    },
 })

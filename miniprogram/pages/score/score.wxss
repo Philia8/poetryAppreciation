@@ -8,12 +8,22 @@
     height: 90rpx;
     /* line-height: 50rpx; */
 }
-.left .time{
+.score-item .left {
+    font-size: 26rpx;
+    color: #777777;
+    width: 10%;
+    height: 100%;
+}
+.center{
+    width: 70%;
+}
+.center .time{
     color: #aaaaaa;
     font-size: 20rpx;
     margin-top: 8rpx;
 }
 .right{
+    width: 10%;
     color: blue;
     line-height: 90rpx;
 }

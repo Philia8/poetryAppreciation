@@ -1,4 +1,4 @@
-<view class="main" bindtap="test">
+<view class="main">
     <!-- 用户头像和昵称 -->
     <view class="avatarContianer">
         <view class="avatar">
@@ -8,9 +8,9 @@
     </view>
 
     <!-- 签到 -->
-    <view  bindtap="check">
-        <item wx:if="{{!isChecked}}" class="signIn" propFunc="签到" icon=">"></item>
-        <item wx:else class="signIn check" propFunc="已签到"  icon="√"></item>    
+    <view bindtap="check" id="check-btn">
+        <button wx:if="{{!isChecked}}" class="signIn" propFunc="签到" icon=">">签到</button>
+        <button wx:else class="signIn checked" propFunc="已签到" icon="o" disabled="true">已签到</button>
     </view>
     <!-- 个人积分 -->
     <item class="grade" propFunc="个人积分"  icon=">" bindtap="goScore"></item>
@@ -19,4 +19,5 @@
     <item class="collection" propFunc="我的收藏" bindtap="goMyColl" icon=">"></item>
     <!-- 个人创作 -->
     <!-- <item class="creation" propFunc="个人创作"  icon=">"></item> -->
+    
 </view>

@@ -1,6 +1,7 @@
 .main {
-    height: 1105rpx;
+    height: auto;
     background-color: #F4F4F4;
+    color: #000000;
 }
 
 
@@ -33,6 +34,25 @@
 }
 
 /* 签到 */
-.check{
-    color: blue
+.main #check-btn{
+    width: 100%;
+    height: 93rpx;
+    /* margin-bottom: 3rpx; */
+    /* padding-left: 8rpx; */
+}
+.main #check-btn button{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    font-weight: unset;
+    padding-left: 33rpx;
+    border-bottom: 2rpx solid rgba(100, 100, 100, .1);
+    /* margin-bottom: 2rpx; */
+    text-align: start;
+}
+.main #check-btn button .signIn{
+   color: #000000;
+}
+.main #check-btn button[disabled] .checked{
+    color: blue !important;
 }
